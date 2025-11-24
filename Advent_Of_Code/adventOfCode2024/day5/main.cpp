@@ -16,9 +16,10 @@ bool checkSequence(vector<int> v, unordered_map<int, set<int>> myMap) {
 void solve(unordered_map<int, set<int>> myMap, vector<vector<int>> v) {
   int ans = 0;
   for (vector<int> x : v) {
-    if (checkSequence(x, myMap)) {
-      ans += x[x.size() / 2];
-    }
+			// This is for part 1
+    // if (checkSequence(x, myMap)) {
+    //   ans += x[x.size() / 2];
+    // }
   }
   cout << ans << "\n";
 }
