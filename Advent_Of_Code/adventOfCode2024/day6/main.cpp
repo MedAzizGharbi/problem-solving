@@ -8,14 +8,15 @@ int dx[] = {-1, 0, 1, 0};
 int dy[] = {0, 1, 0, -1};
 
 int main() {
-  freopen("input.txt", "r", stdin);
+  ifstream fin("input.txt");
+  // freopen("input.txt", "r", stdin);
   string line;
   set<pair<int, int>> visitedCords;
   vector<vector<char>> map;
   pair<int, int> currPos;
   Direction currDirection = UP;
   int i = 0;
-  while (getline(cin, line)) {
+  while (getline(fin, line)) {
     vector<char> temp;
     for (int j = 0; j < line.size(); j++) {
       temp.push_back(line[j]);
