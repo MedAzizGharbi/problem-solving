@@ -3,11 +3,33 @@
 #include <string>
 using namespace std;
 
+bool checkInvalid(string s) {
+  int n = s.length();
+  string ss = "";
+  int r = 0;
+  char last = s[0];
+  for (int len = 1; len < n; len++) {
+    string pattern = s.substr(0, len);
+    if (n % pattern.length() == 0) {
+      int i = 0;
+      size_t pos = s.find(pattern, 0);
+      while (pos != string::npos) {
+        i++;
+        pos = s.find(pattern, pos + pattern.length());
+      }
+      if ((i * pattern.length()) == n) {
+        return true;
+      }
+    }
+  }
+  return false;
+}
+
 int main() {
   ifstream fin("input.txt");
   // ifstream fin("test.txt");
   string line;
-	long long ans = 0;
+  long long ans = 0;
   while (getline(fin, line)) {
     stringstream ss(line);
     vector<pair<string, string>> input;
@@ -17,17 +39,16 @@ int main() {
       size_t foundPos = t.find('-');
       string x = t.substr(0, foundPos);
       string y = t.substr(foundPos + 1);
-			set<char> seen;
-			for(long long i = stoll(x) ; i <= stoll(y) ; i++){
-					string t = to_string(i);
-					if(t.length() % 2) continue;
-					string t1 = t.substr(0, t.length()/2);
-					string t2 = t.substr(t.length()/2);
-					if(t1 == t2) ans += i;
-			}
+      for (long long i = stoll(x); i <= stoll(y); i++) {
+        string t = to_string(i);
+        string s_tosearch = "";
+        if (checkInvalid(t)) {
+          ans += i;
+        }
+      }
     }
     // Houni kamalna krina el input wseparineh
   }
-	cout << ans << "\n";
+  cout << ans << "\n";
   return 0;
 }
